@@ -39,7 +39,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"message": "FastAPI is up!"}
+    return {"message": "FastAPI is now up!"}
 
 
 # Load the .env file
@@ -73,7 +73,7 @@ async def predict(file: UploadFile = File(...)):
     img_bytes = await file.read()
     image = Image.open(io.BytesIO(img_bytes)).convert("RGB")
     img_tensor = transform(image).unsqueeze(0)
-
+    # make sure grad is off
     with torch.no_grad():
         outputs = model_0(img_tensor)
         predicted = torch.argmax(outputs, dim=1).item()
