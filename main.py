@@ -68,19 +68,6 @@ with open('name of the animals.txt', 'r') as f:
     labels = [line.strip() for line in f if line.strip()]
 
 
-import threading
-import time
-import psutil
-
-def log_memory_usage():
-    while True:
-        mem = psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2
-        print(f"[MEMORY] {mem:.2f} MB")
-        time.sleep(10)
-
-threading.Thread(target=log_memory_usage, daemon=True).start()
-
-
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     img_bytes = await file.read()
