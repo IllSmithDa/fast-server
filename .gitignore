@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+.env/
+
+# Environment variables and secret files
+.env
+*.env
+
+# Package management
+pip-log.txt
+poetry.lock
+Pipfile.lock
+
+# VSCode or IDE settings
+.vscode/
+.idea/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Pytest or coverage outputs
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Model files and checkpoints (if any)
+*.pth
+*.pt
+checkpoints/
+models/
+saved_models/
+
+# Static / temp uploads (optional)
+tmp/
+uploads/
