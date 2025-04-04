@@ -25,6 +25,7 @@ app = FastAPI()
 # CORS config
 origins = [
     "http://localhost:5173",
+    "http://localhost:5173/animal-client",
     "https://illsmithda.github.io/animal-client/",
     "https://illsmithda.github.io"
 ]
@@ -37,9 +38,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
-    return {"message": "FastAPI is now up!"}
 
 # Load the .env file
 load_dotenv()
@@ -66,9 +64,13 @@ transform = transforms.Compose([
 with open('name of the animals.txt', 'r') as f:
     labels = [line.strip() for line in f if line.strip()]
 
+@app.get("/")
+def read_root():
+    return {"message": "FastAPI is now up!"}
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
+    print('hello')
     img_bytes = await file.read()
     image = Image.open(io.BytesIO(img_bytes)).convert("RGB")
     img_tensor = transform(image).unsqueeze(0)
