@@ -41,10 +41,8 @@ app.add_middleware(
 def read_root():
     return {"message": "FastAPI is now up!"}
 
-
 # Load the .env file
 load_dotenv()
-
 
 model_url = os.getenv("MODEL_RESOURCE_URL")
 response = requests.get(model_url)
