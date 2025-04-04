@@ -49,6 +49,7 @@ response = requests.get(model_url)
 
 response.raise_for_status()  # Optional: will throw error if download fails
 
+
 buffer = BytesIO(response.content)
 
 # Load model
