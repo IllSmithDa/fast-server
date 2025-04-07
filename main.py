@@ -58,7 +58,8 @@ model_0.eval()
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    # add any normalization if used during training
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], # 3. A mean of [0.485, 0.456, 0.406] (across each colour channel)
+                         std=[0.229, 0.224, 0.225]) # 4. A standard deviation of [0.229, 0.224, 0.225] (across each colour channel),
 ])
 
 with open('name of the animals.txt', 'r') as f:
@@ -75,7 +76,9 @@ async def predict(file: UploadFile = File(...)):
     image = Image.open(io.BytesIO(img_bytes)).convert("RGB")
     img_tensor = transform(image).unsqueeze(0)
     # make sure grad is off
-    with torch.no_grad():
-        outputs = model_0(img_tensor)
-        predicted = torch.argmax(outputs, dim=1).item()
+    with torch.inference_mode():
+        target_image_pred = model_0(img_tensor)
+        target_image_pred_probs = torch.softmax(target_image_pred, dim=1)
+        predicted = torch.argmax(target_image_pred_probs, dim=1).item()
+
         return {"prediction": labels[predicted]}
