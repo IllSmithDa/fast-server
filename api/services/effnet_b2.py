@@ -22,7 +22,7 @@ load_dotenv(dotenv_path=env_path)
 targeted_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # get the labels
-with open('api\dog_labels.txt', 'r') as f:
+with open('api/dog_labels.txt', 'r') as f:
     labels = [line.strip() for line in f if line.strip()]
 
 

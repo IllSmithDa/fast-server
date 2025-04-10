@@ -1,7 +1,7 @@
 # model_server.py
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from api.routers import torchvision_routes
 
 
@@ -22,8 +22,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-from dotenv import load_dotenv, find_dotenv
 
 # Find the .env file
 env_path = find_dotenv()
