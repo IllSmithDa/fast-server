@@ -64,3 +64,4 @@ async def predict(file: UploadFile = File(...)):
       target_image_pred_probs = torch.softmax(target_image_pred, dim=1)
       predicted = torch.argmax(target_image_pred_probs, dim=1).item()
       return {"prediction": labels[predicted]}
+  

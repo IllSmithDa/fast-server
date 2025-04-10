@@ -2,7 +2,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv, find_dotenv
-from api.routers import torchvision_routes
+from api.routers import torchvision_routes, huggingface_routes
 
 
 app = FastAPI()
@@ -30,6 +30,7 @@ env_path = find_dotenv()
 load_dotenv(dotenv_path=env_path)
 
 app.include_router(torchvision_routes.router)
+app.include_router(huggingface_routes.router)
 
 
 @app.get("/")
