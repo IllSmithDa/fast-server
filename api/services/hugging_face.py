@@ -1,7 +1,6 @@
 from huggingface_hub import InferenceClient, login
 from transformers import pipeline
 import os
-import torch
   
 key = os.getenv("HUGGINGFACE_TOKEN")
 login(token=key)
