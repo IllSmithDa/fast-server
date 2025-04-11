@@ -1,5 +1,5 @@
 from huggingface_hub import InferenceClient, login
-from transformers import pipeline
+
 import os
   
 key = os.getenv("HUGGINGFACE_TOKEN")
