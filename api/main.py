@@ -2,7 +2,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv, find_dotenv
-from api.routers import torchvision_routes, huggingface_routes
+from api.routers import torchvision_routes, huggingface_routes, hive_ai_routes
 
 
 app = FastAPI()
@@ -31,7 +31,7 @@ load_dotenv(dotenv_path=env_path)
 
 app.include_router(torchvision_routes.router)
 app.include_router(huggingface_routes.router)
-
+app.include_router(hive_ai_routes.router)
 
 @app.get("/")
 def read_root():
