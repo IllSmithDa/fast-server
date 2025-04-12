@@ -25,3 +25,8 @@
   1. The purpose of this server is to consume the create LLM to predict real world images of dogs and classify its breed
 
   2. Fast Api quick setup made this ideal choice for this type of project
+
+
+# Issues
+
+  1. pillow set to the more stable version 10.2.0 rather than 11.2.0 which when cause issues when publishing 

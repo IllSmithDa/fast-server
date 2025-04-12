@@ -11,4 +11,4 @@ torchvision==0.21.0
 pillow==10.2.0
 typing_extensions==4.13.0
 huggingface_hub==0.30.2
-openai==1.72.0
+openai==1.73.0
