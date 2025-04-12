@@ -1,7 +1,7 @@
 # model_server.py
 from fastapi import File, UploadFile
 import torch
-from torchvision import transforms
+from torchvision.transforms import v2
 from pathlib import Path
 from PIL import Image
 import io
@@ -27,8 +27,8 @@ with open('api/dog_labels.txt', 'r') as f:
 
 
 # setup model config
-weights = torchvision.models.EfficientNet_B2_Weights.DEFAULT # .DEFAULT = best available weights 
-model_0 = torchvision.models.efficientnet_b2(weights=weights).to(targeted_device)
+weights = torchvision.models.EfficientNet_B1_Weights.DEFAULT # .DEFAULT = best available weights 
+model_0 = torchvision.models.efficientnet_b1(weights=weights).to(targeted_device)
 num_features = model_0.classifier[1].in_features
 model_0.classifier[1] = torch.nn.Linear(num_features, len(labels))
 
@@ -45,11 +45,11 @@ model_0.load_state_dict(torch.load(buffer, map_location=torch.device(targeted_de
 model_0.eval()
 
 # Image transform
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], # 3. A mean of [0.485, 0.456, 0.406] (across each colour channel)
-                         std=[0.229, 0.224, 0.225]) # 4. A standard deviation of [0.229, 0.224, 0.225] (across each colour channel),
+transform = v2.Compose([
+    v2.ToImage(),  # Convert to tensor, only needed if you had a PIL imagea
+    v2.Resize((224, 224), antialias=True),
+    v2.ToDtype(torch.float32, scale=True),  # Normalize expects float input
+    v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
 
